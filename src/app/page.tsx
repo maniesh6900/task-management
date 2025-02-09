@@ -6,7 +6,7 @@ export default function Home() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [dueDate, setDueDate] = useState("");
-    const [error, setError] = useState<any>();
+    const [error, setError] = useState(null);
     const [data, setData] = useState([]);
 
     useEffect(()=>{
@@ -17,7 +17,6 @@ export default function Home() {
             } catch (error) {
                 console.log(error, "ERROR");
                 setData([]);
-                setError(error)
             }
         }
         hadnleAPI();
@@ -30,12 +29,14 @@ export default function Home() {
                 setDescription('');
                 setDueDate('');
             
-        } catch (error) {
+        } catch (error : object) {
             setError(error)    
         }
     };
 
-    const handlerButton = async(task : any) =>{
+    const handlerButton = async(task : object) =>{
+        console.log(typeof task);
+        
         setTitle(task.title);
         setDescription(task.description);
         setDueDate(task.dueDate);
@@ -109,11 +110,10 @@ export default function Home() {
             <ol 
                 className='w-1/5  p-4 rounded flex flex-col gap-6 '
             >
-                {data.map((task : any) => (
-                    <li 
-
-                        key={task._id} 
-                        className={` ${ task.completed ? 'line-through' : '' }  rounded bg-slate-500 p-4 ` }
+                {data.map((task : object) => { 
+                   return <li
+                        key={task?._id} 
+                        className={` ${ task?.completed ? 'line-through' : '' }  rounded bg-slate-500 p-4 ` }
                         
                     >
                         <h3>Title:  {task.title}</h3>
@@ -136,7 +136,7 @@ export default function Home() {
                         >
                             Done</button> 
                     </li>
-                ))}
+                })}
             </ol>
         </div>
     );

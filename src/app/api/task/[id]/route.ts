@@ -5,20 +5,7 @@ import {NextRequest, NextResponse} from "next/server"
 await connectToDatabase();
 
 
-// export async function PUT(req: NextRequest) {
-//     const { title, description, data, status, id } = await req.json();
-//     try {
-//         const updatedTask = await Task.findByIdAndUpdate(id, { title, description, data, status }, { new: true }); 
-//         if (!updatedTask) {
-//             return NextResponse.json({ message: "Task not found" }, { status: 404 }); 
-//         }
-//         return NextResponse.json(updatedTask, { status: 200 }); 
-//     } catch (error) {
-//         return NextResponse.json({ message: "Error updating task" }, { status: 500 }); 
-//     }
-// }
-
-export async function PUT(req : NextRequest, {params} : any) {
+export async function PUT(req : NextRequest, {params} : { params: { id: string } }) {
     const {id } = params;
     try { 
        const res = await Task.findByIdAndUpdate(
@@ -35,7 +22,7 @@ export async function PUT(req : NextRequest, {params} : any) {
 }
 
 
-export async function DELETE(req : NextRequest, { params } : any) {
+export async function DELETE(req : NextRequest,  {params} : { params: { id: string } }) {
     const { id } = params;
     console.log(id);
     try {

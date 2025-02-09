@@ -8,7 +8,8 @@ export async function GET(){
    try {
        const data =  await Task.find();
        return NextResponse.json({data});
-   } catch (error : any) {
+   } catch (error) {
+        console.log(typeof error);
         return NextResponse.json({msg : "Database Error"});
    }
 }
