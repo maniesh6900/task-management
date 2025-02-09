@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const connectToDatabase = async () => {
-    const connection = await mongoose.connect("mongodb://kaj882626:tasting123@localhost:27017");
+    const connection = await mongoose.connect("yourDBURL");
     console.log(connection.connection.port);
     
 };

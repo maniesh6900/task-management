@@ -46,7 +46,6 @@ export default function Home() {
     }
     
     const deleteTask = async(id : string)=>{
-        console.log(id);
         try {
             const res =  await axios.delete(`/api/task/${id}`)
             console.log(res);
@@ -112,8 +111,8 @@ export default function Home() {
             >
                 {data.map((task : object) => { 
                    return <li
-                        key={task?._id} 
-                        className={` ${ task?.completed ? 'line-through' : '' }  rounded bg-slate-500 p-4 ` }
+                        key={task._id} 
+                        className={` ${ task.completed ? 'line-through' : '' }  rounded bg-slate-500 p-4 ` }
                         
                     >
                         <h3>Title:  {task.title}</h3>
